@@ -1,68 +1,96 @@
-/* Rentala Login CSS - Can be reused across pages */
-:root {
-    --primary: #4361ee;
-    --primary-dark: #3a56d4;
-    --secondary: #7209b7;
-    --success: #4cc9f0;
-    --light: #f8f9fa;
-    --dark: #212529;
-    --gray: #6c757d;
-    --gray-light: #e9ecef;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-}
+/* Login Page Styles - Final Polish */
+@import url('rentala-design-system.css');
 
-.login-background {
+/* Login specific styles */
+.login-page {
     min-height: 100vh;
+    background: 
+        url('rentala_web_background.png') center/cover no-repeat fixed,
+        linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.05) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: 
-        linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%),
-        url('rentala_web_background.png') center/cover no-repeat fixed;
-    padding: 20px;
+    padding: var(--space-6);
 }
 
 .login-container {
-    display: flex;
     width: 100%;
-    max-width: 1200px;
-    min-height: 700px;
-    background: white;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    animation: slideUp 0.8s ease;
+    max-width: 400px;
 }
 
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+.login-card {
+    composes: glass-card;
+    animation: slideUp 0.6s ease-out;
 }
 
-.login-left {
-    flex: 1;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    color: white;
-    padding: 60px 50px;
+.login-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.login-header h1 {
+    font-size: 2rem;
+    margin-bottom: var(--space-2);
+    background: linear-gradient(135deg, var(--color-primary-600), var(--color-secondary-600));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.login-header p {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.login-form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: var(--space-6);
 }
 
-.login-right {
-    flex: 1;
-    padding: 60px 50px;
+.form-group {
+    composes: form-group;
+}
+
+.form-label {
+    composes: form-label;
+}
+
+.form-control {
+    composes: form-control;
+}
+
+.login-actions {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+}
+
+.btn-login {
+    composes: btn btn-primary btn-lg;
+}
+
+.btn-register {
+    composes: btn btn-secondary;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: var(--space-8);
+    padding-top: var(--space-4);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    font-size: 0.875rem;
 }
 
 /* Responsive */
-@media (max-width: 992px) {
-    .login-container {
-        flex-direction: column;
-        max-width: 500px;
-        min-height: auto;
+@media (max-width: 640px) {
+    .login-page {
+        padding: var(--space-4);
+    }
+    
+    .login-card {
+        padding: var(--space-4);
     }
 }

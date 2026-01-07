@@ -22,7 +22,6 @@ const JWT_SECRET = process.env.JWT_SECRET || 'rentala_secret_key_2026';
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
-app.use(express.static('.'));
 app.use(security.requestLogger);
 
 const db = mysql.createConnection({
@@ -63,10 +62,6 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-// Default route - serve login page
-app.get('/', (req, res) => {
-    res.redirect('/login.html');
-});
 app.listen(PORT, () => {
     console.log(`íº€ Server running at http://localhost:${PORT}` );
 });

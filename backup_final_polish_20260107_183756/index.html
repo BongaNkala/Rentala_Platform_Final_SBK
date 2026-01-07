@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rentala - Elegant Property Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="clear-background"></div>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="brand-logo"><i class="fas fa-home"></i></div>
+            <h1 class="engraved-logo">Rentala</h1>
+            <div class="brand-tagline">PROPERTY MANAGEMENT SOLUTION</div>
+        </div>
+        <div class="form-container">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <div class="input-container">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="email" class="form-input" placeholder="name@company.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <div class="input-container">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+                        <button type="button" class="password-toggle" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="login-btn" id="loginButton">Sign In to Dashboard</button>
+                
+                <div class="demo-credentials">
+                    <div class="demo-title">Demo Account</div>
+                    <div class="demo-cred">Email: demo@rentala.com</div>
+                    <div class="demo-cred">Password: demopassword123</div>
+                    <button type="button" class="try-demo-btn" id="demoLogin">Auto-fill Demo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            togglePassword.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const btn = document.getElementById('loginButton');
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+            btn.disabled = true;
+
+            try {
+                const res = await fetch('http://localhost:3002/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password } )
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    localStorage.setItem('token', data.token);
+                    window.location.href = "dashboard.html";
+                } else {
+                    alert(data.message || 'Login failed');
+                    btn.innerHTML = 'Sign In to Dashboard';
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                alert('Connection error. Is the backend running on port 3002?');
+                btn.innerHTML = 'Sign In to Dashboard';
+                btn.disabled = false;
+            }
+        });
+
+        document.getElementById('demoLogin').addEventListener('click', () => {
+            document.getElementById('email').value = 'demo@rentala.com';
+            document.getElementById('password').value = 'demopassword123';
+        });
+    </script>
+</body>
+</html>

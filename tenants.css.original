@@ -1,0 +1,1128 @@
+/* ============================================
+   TENANT MANAGEMENT - GLASSMORPHISM DESIGN
+   Aligned with Rentala Platform Universal Design
+   Features: Glass effects, gradients, animations
+   Updated: 2026-01-07
+   ============================================ */
+
+/* ========================
+   UNIVERSAL DESIGN VARIABLES
+   Matching login.css and dashboard.css
+   ======================== */
+:root {
+    /* Primary Color Palette */
+    --primary-blue: #4361ee;
+    --secondary-purple: #3a0ca3;
+    --accent-pink: #f72585;
+    --success-teal: #4cc9f0;
+    --warning-orange: #f8961e;
+    --danger-red: #e63946;
+    
+    /* Glass Effect Variables */
+    --glass-bg-light: rgba(255, 255, 255, 0.15);
+    --glass-bg-medium: rgba(255, 255, 255, 0.25);
+    --glass-bg-dark: rgba(255, 255, 255, 0.35);
+    --glass-border-light: rgba(255, 255, 255, 0.2);
+    --glass-border-medium: rgba(255, 255, 255, 0.3);
+    --glass-border-dark: rgba(255, 255, 255, 0.4);
+    --glass-shadow-light: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --glass-shadow-medium: 0 12px 48px rgba(0, 0, 0, 0.15);
+    --glass-shadow-heavy: 0 20px 80px rgba(0, 0, 0, 0.2);
+    
+    /* Gradient Backgrounds */
+    --gradient-primary: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+    --gradient-secondary: linear-gradient(135deg, #7209b7 0%, #f72585 100%);
+    --gradient-success: linear-gradient(135deg, #4cc9f0 0%, #4895ef 100%);
+    --gradient-glass: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        rgba(255, 255, 255, 0.05) 100%);
+    
+    /* Spacing System */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-2xl: 4rem;
+    
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+    
+    /* Typography */
+    --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 2rem;
+    
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 300ms ease;
+    --transition-slow: 500ms ease;
+    --transition-bounce: 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ========================
+   PAGE LAYOUT & BACKGROUND
+   ======================== */
+.tenant-management-page {
+    min-height: 100vh;
+    background: 
+        /* Background image */
+        url('rentala_web_background.png') center/cover no-repeat fixed,
+        /* Gradient overlay */
+        linear-gradient(135deg, 
+            rgba(67, 97, 238, 0.1) 0%, 
+            rgba(58, 12, 163, 0.05) 50%,
+            rgba(247, 37, 133, 0.02) 100%);
+    font-family: var(--font-family);
+    padding: var(--space-lg);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Animated background elements */
+.tenant-bg-element {
+    position: fixed;
+    border-radius: 50%;
+    background: radial-gradient(circle, 
+        rgba(67, 97, 238, 0.1) 0%, 
+        rgba(67, 97, 238, 0) 70%);
+    z-index: -1;
+    animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(20px, -20px) scale(1.05); }
+    50% { transform: translate(-15px, 15px) scale(0.95); }
+    75% { transform: translate(10px, 10px) scale(1.02); }
+}
+
+/* ========================
+   GLASS EFFECT COMPONENTS
+   ======================== */
+
+/* Glass Card - Main container */
+.glass-card {
+    background: var(--glass-bg-light);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: 
+        var(--glass-shadow-light),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.4), 
+        transparent);
+}
+
+.glass-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        var(--glass-shadow-medium),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    background: var(--glass-bg-medium);
+}
+
+/* Glass Header */
+.glass-header {
+    background: var(--glass-bg-medium);
+    backdrop-filter: blur(30px) saturate(200%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
+    border: 1px solid var(--glass-border-medium);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    box-shadow: 
+        var(--glass-shadow-medium),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Glass Panel */
+.glass-panel {
+    background: var(--glass-bg-light);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* ========================
+   TENANT SPECIFIC COMPONENTS
+   ======================== */
+
+/* Tenant Card */
+.tenant-card {
+    composes: glass-card;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.tenant-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-sm);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--glass-border-light);
+}
+
+.tenant-card-body {
+    flex: 1;
+    display: grid;
+    gap: var(--space-xs);
+}
+
+.tenant-card-footer {
+    display: flex;
+    gap: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--glass-border-light);
+}
+
+/* Tenant Grid Layout */
+.tenants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0;
+}
+
+/* Tenant Details Panel */
+.tenant-details-panel {
+    composes: glass-card;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* ========================
+   FORM ELEMENTS WITH GLASS EFFECT
+   ======================== */
+
+/* Glass Input */
+.glass-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--glass-border-light);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    color: #333;
+    transition: all var(--transition-fast);
+}
+
+.glass-input::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.glass-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--primary-blue);
+    box-shadow: 
+        0 0 0 3px rgba(67, 97, 238, 0.2),
+        inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+/* Glass Select */
+.glass-select {
+    composes: glass-input;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%234361ee' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+}
+
+/* Glass Textarea */
+.glass-textarea {
+    composes: glass-input;
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* ========================
+   BUTTONS WITH GLASS EFFECT
+   ======================== */
+
+/* Glass Button Base */
+.glass-button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent);
+    transition: left 0.6s ease;
+}
+
+.glass-button:hover::before {
+    left: 100%;
+}
+
+/* Primary Glass Button */
+.glass-button-primary {
+    composes: glass-button;
+    background: linear-gradient(135deg, 
+        rgba(67, 97, 238, 0.9) 0%, 
+        rgba(58, 12, 163, 0.8) 100%);
+    color: white;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 8px 32px rgba(67, 97, 238, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.glass-button-primary:hover {
+    background: linear-gradient(135deg, 
+        rgba(67, 97, 238, 1) 0%, 
+        rgba(58, 12, 163, 0.9) 100%);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 12px 40px rgba(67, 97, 238, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Secondary Glass Button */
+.glass-button-secondary {
+    composes: glass-button;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #333;
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.glass-button-secondary:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Danger Glass Button */
+.glass-button-danger {
+    composes: glass-button;
+    background: linear-gradient(135deg, 
+        rgba(247, 37, 133, 0.9) 0%, 
+        rgba(230, 57, 70, 0.8) 100%);
+    color: white;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 8px 32px rgba(247, 37, 133, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* ========================
+   STATUS BADGES & INDICATORS
+   ======================== */
+
+/* Glass Status Badge */
+.glass-badge {
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(10px);
+    border: 1px solid;
+}
+
+.glass-badge-active {
+    composes: glass-badge;
+    background: rgba(76, 201, 240, 0.2);
+    border-color: rgba(76, 201, 240, 0.4);
+    color: #4cc9f0;
+}
+
+.glass-badge-inactive {
+    composes: glass-badge;
+    background: rgba(247, 37, 133, 0.2);
+    border-color: rgba(247, 37, 133, 0.4);
+    color: #f72585;
+}
+
+.glass-badge-pending {
+    composes: glass-badge;
+    background: rgba(248, 150, 30, 0.2);
+    border-color: rgba(248, 150, 30, 0.4);
+    color: #f8961e;
+}
+
+/* ========================
+   MODALS & DIALOGS
+   ======================== */
+
+/* Glass Modal */
+.glass-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.glass-modal-content {
+    composes: glass-card;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ========================
+   DATA VISUALIZATION
+   ======================== */
+
+/* Glass Stats Card */
+.glass-stats-card {
+    composes: glass-card;
+    text-align: center;
+    padding: var(--space-xl);
+}
+
+.glass-stats-value {
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: var(--space-sm) 0;
+}
+
+.glass-stats-label {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+}
+
+/* Progress Bar */
+.glass-progress {
+    height: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin: var(--space-md) 0;
+}
+
+.glass-progress-bar {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ========================
+   UTILITY CLASSES
+   ======================== */
+
+/* Glass utility classes */
+.bg-glass-light { background: var(--glass-bg-light); }
+.bg-glass-medium { background: var(--glass-bg-medium); }
+.bg-glass-dark { background: var(--glass-bg-dark); }
+
+.border-glass-light { border: 1px solid var(--glass-border-light); }
+.border-glass-medium { border: 1px solid var(--glass-border-medium); }
+.border-glass-dark { border: 1px solid var(--glass-border-dark); }
+
+.shadow-glass-light { box-shadow: var(--glass-shadow-light); }
+.shadow-glass-medium { box-shadow: var(--glass-shadow-medium); }
+.shadow-glass-heavy { box-shadow: var(--glass-shadow-heavy); }
+
+.backdrop-blur-sm { backdrop-filter: blur(10px); }
+.backdrop-blur-md { backdrop-filter: blur(20px); }
+.backdrop-blur-lg { backdrop-filter: blur(30px); }
+
+/* ========================
+   DARK MODE SUPPORT
+   ======================== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --glass-bg-light: rgba(255, 255, 255, 0.05);
+        --glass-bg-medium: rgba(255, 255, 255, 0.08);
+        --glass-bg-dark: rgba(255, 255, 255, 0.12);
+        --glass-border-light: rgba(255, 255, 255, 0.1);
+        --glass-border-medium: rgba(255, 255, 255, 0.15);
+        --glass-border-dark: rgba(255, 255, 255, 0.2);
+    }
+    
+    .tenant-management-page {
+        background: 
+            url('rentala_web_background.png') center/cover no-repeat fixed,
+            linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.7) 0%, 
+                rgba(0, 0, 0, 0.5) 50%,
+                rgba(0, 0, 0, 0.3) 100%);
+    }
+    
+    .glass-input {
+        background: rgba(255, 255, 255, 0.05);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .glass-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .glass-stats-label {
+        color: rgba(255, 255, 255, 0.6);
+    }
+}
+
+/* ========================
+   RESPONSIVE DESIGN
+   ======================== */
+@media (max-width: 768px) {
+    .tenants-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+    
+    .tenant-management-page {
+        padding: var(--space-sm);
+    }
+    
+    .glass-card {
+        padding: var(--space-md);
+    }
+    
+    .glass-header {
+        padding: var(--space-lg);
+    }
+}
+
+/* ========================
+   ANIMATIONS & TRANSITIONS
+   ======================== */
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+.shimmer-effect {
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.1) 50%, 
+        transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* ========================
+   LOADING STATES
+   ======================== */
+.glass-skeleton {
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.1) 25%, 
+        rgba(255, 255, 255, 0.2) 50%, 
+        rgba(255, 255, 255, 0.1) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--radius-md);
+}
+
+/* ========================
+   ACCESSIBILITY
+   ======================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .glass-button::before {
+        display: none;
+    }
+}
+
+/* ========================
+   PRINT STYLES
+   ======================== */
+@media print {
+    .tenant-management-page {
+        background: white !important;
+    }
+    
+    .glass-card,
+    .glass-header,
+    .glass-panel {
+        background: white !important;
+        backdrop-filter: none !important;
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+    }
+}
+
+/* ============================================
+   FORM ELEMENTS - COMPLETE STYLING
+   For form-group, labels, inputs, etc.
+   ============================================ */
+
+/* Form Group Container */
+.form-group {
+    margin-bottom: var(--space-lg);
+    position: relative;
+}
+
+/* Form Labels */
+.form-group label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-weight: 600;
+    color: #333;
+    font-size: var(--font-size-base);
+    transition: color var(--transition-fast);
+}
+
+.form-group label::after {
+    content: '*';
+    color: var(--accent-pink);
+    margin-left: 4px;
+    opacity: 0.8;
+}
+
+/* Required field indicator */
+.form-group label:has(+ input:required)::after,
+.form-group label:has(+ select:required)::after,
+.form-group label:has(+ textarea:required)::after {
+    content: '*';
+    color: var(--accent-pink);
+    margin-left: 4px;
+    opacity: 0.8;
+}
+
+/* Form Inputs - Enhanced Glass Effect */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group input[type="password"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid var(--glass-border-light);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    color: #333;
+    transition: all var(--transition-base);
+    font-family: var(--font-family);
+    box-sizing: border-box;
+}
+
+/* Input Placeholder */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 400;
+}
+
+/* Input Focus State */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.18);
+    border-color: var(--primary-blue);
+    box-shadow: 
+        0 0 0 4px rgba(67, 97, 238, 0.15),
+        inset 0 2px 8px rgba(255, 255, 255, 0.3),
+        0 4px 20px rgba(67, 97, 238, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Input Hover State */
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--glass-border-medium);
+}
+
+/* Valid Input State */
+.form-group input:valid,
+.form-group select:valid,
+.form-group textarea:valid {
+    border-color: rgba(76, 201, 240, 0.4);
+    background: rgba(76, 201, 240, 0.05);
+}
+
+.form-group input:valid:focus {
+    border-color: var(--success-teal);
+    box-shadow: 
+        0 0 0 4px rgba(76, 201, 240, 0.15),
+        inset 0 2px 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Invalid Input State */
+.form-group input:invalid:not(:placeholder-shown),
+.form-group select:invalid:not(:placeholder-shown),
+.form-group textarea:invalid:not(:placeholder-shown) {
+    border-color: rgba(247, 37, 133, 0.4);
+    background: rgba(247, 37, 133, 0.05);
+}
+
+.form-group input:invalid:focus:not(:placeholder-shown) {
+    border-color: var(--accent-pink);
+    box-shadow: 
+        0 0 0 4px rgba(247, 37, 133, 0.15),
+        inset 0 2px 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Select Element Specific Styles */
+.form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%234361ee' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 48px;
+    cursor: pointer;
+}
+
+/* Textarea Specific Styles */
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* Form Row Layout */
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+/* Form Help Text */
+.form-help {
+    display: block;
+    margin-top: var(--space-xs);
+    font-size: var(--font-size-sm);
+    color: rgba(0, 0, 0, 0.6);
+    font-style: italic;
+}
+
+/* Form Validation Messages */
+.form-error {
+    display: block;
+    margin-top: var(--space-xs);
+    font-size: var(--font-size-sm);
+    color: var(--accent-pink);
+    font-weight: 500;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Form Icons */
+.form-group.with-icon {
+    position: relative;
+}
+
+.form-group.with-icon input {
+    padding-left: 48px;
+}
+
+.form-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(0, 0, 0, 0.5);
+    font-size: var(--font-size-lg);
+    pointer-events: none;
+    transition: color var(--transition-fast);
+}
+
+.form-group input:focus + .form-icon {
+    color: var(--primary-blue);
+}
+
+/* Form Field Success State */
+.form-group.success input {
+    border-color: rgba(76, 201, 240, 0.6);
+    background: rgba(76, 201, 240, 0.08);
+}
+
+.form-group.success .form-icon {
+    color: var(--success-teal);
+}
+
+/* Form Field Error State */
+.form-group.error input {
+    border-color: rgba(247, 37, 133, 0.6);
+    background: rgba(247, 37, 133, 0.08);
+}
+
+.form-group.error .form-icon {
+    color: var(--accent-pink);
+}
+
+/* Form Checkboxes and Radios */
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+    cursor: pointer;
+}
+
+.form-check-input {
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--glass-border-light);
+    border-radius: var(--radius-sm);
+    appearance: none;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.form-check-input:checked {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+.form-check-input:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.form-check-label {
+    font-weight: 500;
+    color: #333;
+    user-select: none;
+}
+
+/* Form Toggle Switch */
+.form-switch {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.switch {
+    position: relative;
+    width: 52px;
+    height: 28px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--glass-border-light);
+    border-radius: 34px;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 2px;
+    background: white;
+    border-radius: 50%;
+    transition: .4s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .slider {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--glass-border-light);
+}
+
+/* Dark Mode Form Styles */
+@media (prefers-color-scheme: dark) {
+    .form-group label {
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.15);
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--primary-blue);
+    }
+    
+    .form-group input:valid {
+        background: rgba(76, 201, 240, 0.1);
+        border-color: rgba(76, 201, 240, 0.3);
+    }
+    
+    .form-group input:invalid:not(:placeholder-shown) {
+        background: rgba(247, 37, 133, 0.1);
+        border-color: rgba(247, 37, 133, 0.3);
+    }
+    
+    .form-help {
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .form-check-label {
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .form-check-input {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.15);
+    }
+    
+    .slider {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.15);
+    }
+}
+
+/* Form Responsive Design */
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+    }
+    
+    .form-group {
+        margin-bottom: var(--space-md);
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 12px 14px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions .glass-button {
+        width: 100%;
+    }
+}
+
+/* Form Animation for Loading States */
+@keyframes formPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.form-loading .form-group input,
+.form-loading .form-group select,
+.form-loading .form-group textarea {
+    animation: formPulse 2s ease-in-out infinite;
+}
+
+/* Custom Form Validation Styles */
+.form-group input:user-invalid {
+    border-color: var(--accent-pink);
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Form Success Animation */
+.form-group.success input {
+    animation: successGlow 1.5s ease;
+}
+
+@keyframes successGlow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(76, 201, 240, 0);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(76, 201, 240, 0.3);
+    }
+}
+
+/* Form Character Counter */
+.char-counter {
+    text-align: right;
+    font-size: var(--font-size-xs);
+    color: rgba(0, 0, 0, 0.5);
+    margin-top: var(--space-xs);
+}
+
+.char-counter.warning {
+    color: var(--warning-orange);
+}
+
+.char-counter.error {
+    color: var(--accent-pink);
+}
+
+/* Form Autofill Styles */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover, 
+.form-group input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #333;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.1) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+@media (prefers-color-scheme: dark) {
+    .form-group input:-webkit-autofill,
+    .form-group input:-webkit-autofill:hover, 
+    .form-group input:-webkit-autofill:focus {
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.9);
+        -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.05) inset;
+    }
+}

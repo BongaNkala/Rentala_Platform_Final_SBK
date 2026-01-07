@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "node_modules": true,
+      "*.db": false
+    },
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  }
+}

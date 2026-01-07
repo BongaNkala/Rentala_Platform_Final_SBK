@@ -76,6 +76,14 @@ function setupEventListeners() {
             // Update chart/data based on selected period
             const period = this.textContent.toLowerCase();
             updateChartData(period);
+    });
+    });
+
+    // Initialize first period button as active
+    const firstPeriodBtn = document.querySelector('.period-btn');
+    if (firstPeriodBtn && !document.querySelector('.period-btn.active')) {
+        firstPeriodBtn.classList.add('.active');
+    }
             console.log(`í³Š Period changed to: ${period}`);
         });
     });

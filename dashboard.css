@@ -756,3 +756,212 @@ body {
     background: rgba(245, 158, 11, 0.9);
     color: white;
 }
+
+/* ========== CONTENT GRID ========== */
+.content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.chart-container,
+.activities-container {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 25px;
+    transition: var(--transition);
+}
+
+.chart-container:hover,
+.activities-container:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.chart-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+}
+
+.chart-period {
+    display: flex;
+    gap: 10px;
+}
+
+.period-btn {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.period-btn.active,
+.period-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.chart-placeholder {
+    height: 300px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+    text-align: center;
+    padding: 20px;
+}
+
+/* ========== ACTIVITIES ========== */
+.activities-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.activities-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+}
+
+.view-all {
+    font-size: 14px;
+    color: var(--accent);
+    text-decoration: none;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.view-all:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+}
+
+.activity-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(5px);
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(76, 201, 240, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.activity-details h4 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+}
+
+.activity-details p {
+    margin: 5px 0 0 0;
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.activity-time {
+    margin-left: auto;
+    font-size: 12px;
+    opacity: 0.6;
+    white-space: nowrap;
+}
+
+/* ========== RESPONSIVE CONTENT GRID ========== */
+@media (max-width: 1200px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .chart-period {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .period-btn {
+        flex: 1;
+        text-align: center;
+    }
+    
+    .activity-item {
+        flex-wrap: wrap;
+    }
+    
+    .activity-time {
+        margin-left: 55px; /* Align with content after icon */
+        width: 100%;
+        text-align: right;
+        font-size: 11px;
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .chart-placeholder {
+        height: 200px;
+        font-size: 14px;
+    }
+    
+    .activity-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+}

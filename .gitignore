@@ -29,3 +29,5 @@ Thumbs.db
 # Build files
 dist/
 build/
+backend.log
+rentala.db

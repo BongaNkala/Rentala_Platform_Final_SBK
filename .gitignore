@@ -29,3 +29,7 @@ Thumbs.db
 # Build files
 dist/
 build/
+.env
+backend.log
+rentala.db
+node_modules/

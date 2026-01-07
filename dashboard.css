@@ -41,7 +41,7 @@
     animation-range-start: normal;
     animation-timeline: auto;
     animation-timing-function: ease;
-    app-region: none;
+    shape-margin: none;
     appearance: none;
     aspect-ratio: auto;
     backdrop-filter: none;
@@ -49,15 +49,15 @@
     background-attachment: scroll;
     background-blend-mode: normal;
     background-clip: border-box;
-    background-color: rgba(0, 0, 0, 0);
-    background-image: none;
+    
+    
     background-origin: padding-box;
     background-position-x: 0%;
     background-position-y: 0%;
     background-repeat: repeat;
     background-size: auto;
     baseline-shift: 0px;
-    baseline-source: auto;
+    border-image-source: auto;
     border-block-end-color: rgba(255, 255, 255, 0.95);
     border-block-end-style: none;
     border-block-end-width: 0px;
@@ -103,18 +103,18 @@
     break-after: auto;
     break-before: auto;
     break-inside: auto;
-    buffered-rendering: auto;
+    shape-rendering: auto;
     caption-side: top;
-    caret-animation: auto;
+    -o-animation-name: auto;
     caret-color: rgba(255, 255, 255, 0.95);
     clear: none;
     clip: auto;
     clip-path: none;
     clip-rule: nonzero;
     color: rgba(255, 255, 255, 0.95);
-    color-interpolation: srgb;
+    -ms-interpolation-mode: srgb;
     color-interpolation-filters: linearrgb;
-    color-rendering: auto;
+    image-rendering: auto;
     color-scheme: normal;
     column-count: auto;
     column-fill: balance;
@@ -133,14 +133,14 @@
     container-type: normal;
     content: normal;
     content-visibility: visible;
-    corner-bottom-left-shape: round;
-    corner-bottom-right-shape: round;
-    corner-end-end-shape: round;
-    corner-end-start-shape: round;
-    corner-start-end-shape: round;
-    corner-start-start-shape: round;
-    corner-top-left-shape: round;
-    corner-top-right-shape: round;
+    border-bottom-left-radius: round;
+    border-bottom-right-radius: round;
+    border-end-end-radius: round;
+    border-end-start-radius: round;
+    border-start-end-radius: round;
+    border-start-start-radius: round;
+    border-top-left-radius: round;
+    border-top-right-radius: round;
     counter-increment: none;
     counter-reset: none;
     counter-set: none;
@@ -204,8 +204,8 @@
     inset-inline-end: auto;
     inset-inline-start: auto;
     interactivity: auto;
-    interest-delay-end: normal;
-    interest-delay-start: normal;
+    -o-animation-delay: normal;
+    animation-play-state: normal;
     interpolate-size: numeric-only;
     isolation: auto;
     justify-content: normal;
@@ -298,8 +298,8 @@
     print-color-adjust: economy;
     quotes: auto;
     r: 0px;
-    reading-flow: normal;
-    reading-order: 0;
+    padding-left: normal;
+    padding-block: 0;
     resize: none;
     right: auto;
     rotate: none;
@@ -319,7 +319,7 @@
     scroll-margin-left: 0px;
     scroll-margin-right: 0px;
     scroll-margin-top: 0px;
-    scroll-marker-group: none;
+    scrollbar-arrow-color: none;
     scroll-padding-block-end: auto;
     scroll-padding-block-start: auto;
     scroll-padding-bottom: auto;
@@ -331,7 +331,7 @@
     scroll-snap-align: none;
     scroll-snap-stop: normal;
     scroll-snap-type: none;
-    scroll-target-group: none;
+    scroll-initial-target: none;
     scroll-timeline-axis: block;
     scroll-timeline-name: none;
     scrollbar-color: auto;
@@ -341,7 +341,7 @@
     shape-margin: 0px;
     shape-outside: none;
     shape-rendering: auto;
-    speak: normal;
+    speak-as: normal;
     stop-color: rgb(0, 0, 0);
     stop-opacity: 1;
     stroke: none;
@@ -357,7 +357,7 @@
     text-align: start;
     text-align-last: auto;
     text-anchor: start;
-    text-autospace: no-autospace;
+    -webkit-appearance: no-autospace;
     text-box-edge: auto;
     text-box-trim: none;
     text-combine-upright: none;
@@ -401,7 +401,7 @@
     view-timeline-inset: auto;
     view-timeline-name: none;
     view-transition-class: none;
-    view-transition-group: normal;
+    -o-transition-property: normal;
     view-transition-name: none;
     visibility: visible;
     white-space-collapse: collapse;
@@ -449,9 +449,14 @@
 
 /* Dashboard Specific Styles */
 body {
+    background-image: url("images/rentala_web_background.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
     font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 16px;
-    background: transparent;
     color: rgba(255, 255, 255, 0.95);
 }
 
@@ -1487,89 +1492,106 @@ body {
     font-family: var(--fa-style-family-classic);
 }
 
-/* Volume visualizer */
-#volume-booster-visusalizer {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: var(--glass);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-radius: 15px;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    z-index: 1000;
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
 }
 
-.sound {
-    position: relative;
-    width: 30px;
-    height: 30px;
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
-.sound-icon {
-    width: 100%;
-    height: 100%;
-    background: var(--accent);
-    border-radius: 50%;
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
 }
 
-.sound-wave {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 2px solid var(--accent);
-    border-radius: 50%;
-    opacity: 0.3;
+/* Animation Keyframes */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
-.sound-wave_one {
-    width: 40px;
-    height: 40px;
-    animation: pulse 1s ease-in-out infinite;
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
 }
 
-.sound-wave_two {
-    width: 50px;
-    height: 50px;
-    animation: pulse 1s ease-in-out infinite 0.2s;
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
-.sound-wave_three {
-    width: 60px;
-    height: 60px;
-    animation: pulse 1s ease-in-out infinite 0.4s;
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
 }
 
-.segments-box {
-    display: flex;
-    gap: 5px;
+/* Animation Keyframes */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
-.segment {
-    width: 10px;
-    height: 30px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-    overflow: hidden;
-    position: relative;
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
 }
 
-.segment span {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: var(--accent);
-    border-radius: 5px;
-    animation: pulse 1s ease-in-out infinite;
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
-.segment:nth-child(1) span { height: 20%; animation-delay: 0s; }
-.segment:nth-child(2) span { height: 40%; animation-delay: 0.1s; }
-.segment:nth-child(3) span { height: 60%; animation-delay: 0.2s; }
-.segment:nth-child(4) span { height: 80%; animation-delay: 0.3s; }
-.segment:nth-child(5) span { height: 100%; animation-delay: 0.4s; }
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Main Background Image */
+body {
+    background-image: url('images/rentala_web_background.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
+}

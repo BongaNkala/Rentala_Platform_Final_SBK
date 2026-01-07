@@ -1,0 +1,29 @@
+{
+  "platform_overview": "Rentala is a modern, secure, and intuitive property management platform designed to bridge the gap between property managers and tenants.",
+  "getting_started": {
+    "login": "Navigate to the login page and enter your registered email and password. The platform uses JWT authentication and locks accounts after 5 failed attempts for security.",
+    "roles": {
+      "property_manager": "Full access to portfolio management, financial reporting, and tenant oversight.",
+      "tenant": "Access to the personal Tenant Portal for lease management, payments, and maintenance requests."
+    }
+  },
+  "manager_guide": {
+    "dashboard": "Provides a real-time snapshot of portfolio health, including metrics like Total Portfolio Value, Occupancy Rate, Monthly Revenue, and Vacancy Rate.",
+    "managing_properties": "Click 'Properties' in the sidebar to view your portfolio. Use 'Add Property' to create new listings by filling in name, address, units, and rent.",
+    "tenant_management": "View active tenants in the Tenant Directory and monitor lease start/end dates with expiration alerts.",
+    "financial_reports": "Generate summaries in the 'Reports' section and use the 'Export' button to download data in CSV format."
+  },
+  "tenant_guide": {
+    "dashboard": "Personalized portal showing lease summary (unit, term, rent) and payment status.",
+    "payments": "View payment history and use the 'Pay Rent' button to initiate secure payments.",
+    "maintenance": "Submit new requests by describing the issue and setting priority. Track status (Pending, In Progress, Completed) in real-time."
+  },
+  "security": {
+    "data_protection": "Uses AES-256 encryption. Data is isolated so users only see relevant information.",
+    "compliance": "Compliant with GDPR and POPIA regulations."
+  },
+  "support": {
+    "forgot_password": "Use the 'Forgot Password' link on the login page for a secure reset.",
+    "contact": "Email support@rentala.com for technical assistance."
+  }
+}

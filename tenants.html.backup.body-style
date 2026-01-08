@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenant Management | Rentala</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Existing Dashboard CSS -->
+    <link rel="stylesheet" href="dashboard.css">
+    
+    <!-- Tenant-specific CSS -->
+    <link rel="stylesheet" href="tenants.css">
+    <link rel="stylesheet" href="comprehensive-polish.css">
+    <link rel="stylesheet" href="rentala-design-system.css">
+    <link rel="stylesheet" href="simple-polish.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <style>
+        /* Loading spinner */
+        .loading-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--tenant-primary);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Notification styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            max-width: 350px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            animation: slideIn 0.3s ease;
+        }
+        
+        .notification-success {
+            background: var(--tenant-dark);
+            border-left: 4px solid var(--tenant-primary);
+        }
+        
+        .notification-error {
+            background: #dc2626;
+            border-left: 4px solid #ef4444;
+        }
+        
+        .notification-warning {
+            background: #d97706;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .notification-info {
+            background: #2563eb;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .notification-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .notification-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 15px;
+            opacity: 0.8;
+        }
+        
+        .notification-close:hover {
+            opacity: 1;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        /* Detail view styles */
+        .tenant-detail-view {
+            padding: 10px;
+        }
+        
+        .detail-section {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .detail-section h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #374151;
+            margin-bottom: 15px;
+        }
+        
+        .detail-section h4 i {
+            color: var(--tenant-primary);
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .detail-item {
+            padding: 10px;
+            background: #f9fafb;
+            border-radius: 6px;
+        }
+        
+        .detail-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+    </style>
+</head>
+<body class="tenants-page">
+    <!-- Background -->
+    <div class="background-overlay"></div>
+    
+    <!-- Main Container -->
+    <div class="page-container" style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 16px; color: var(--text-primary); line-height: 1.6; box-sizing: border-box; margin: 0; display: flex; min-height: 100vh; padding: var(--space-xl); margin-bottom: var(--space-xl); position: relative; overflow: hidden; background: rgba(255, 255, 255, 0.12) !important; backdrop-filter: blur(15px) saturate(180%) !important; border: 1px solid rgba(255, 255, 255, 0.18) !important; border-radius: var(--radius-lg) !important; box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important; transition: all var(--transition-normal) !important;">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-building"></i>
+                    <h2>Rentala</h2>
+                </div>
+                <p class="tagline">Property Management</p>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item">
+                        <a href="dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-home"></i>
+                            <span>Properties</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="tenants.html">
+                            <i class="fas fa-users"></i>
+                            <span>Tenants</span>
+                            <span class="nav-badge" id="tenantNavCount">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Rentals</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Reports</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-wrench"></i>
+                            <span>Maintenance</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="user-info">
+                        <h4>Admin User</h4>
+                        <p>Administrator</p>
+                    </div>
+                </div>
+                <button class="btn-logout" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" style="font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.6; color: var(--light); box-sizing: border-box; margin: 0; overflow-y: auto; flex: 1 1 0%; padding: 30px; background: url('rentala_web_background.png') center/cover no-repeat fixed, linear-gradient(135deg, rgba(67, 97, 238, 0.08) 0%, rgba(58, 12, 163, 0.04) 100%); min-height: calc(100vh - 80px);">
+            <!-- Top Header -->
+            <header class="top-header">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="header-title">
+                    <h1><i class="fas fa-users"></i> Tenant Management</h1>
+                    <p>Manage all tenants and their rental information</p>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="search-box">
+                        <input type="text" id="tenantSearch" placeholder="Search tenants...">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
+                    <button class="btn-primary" id="addTenantBtn">
+                        <i class="fas fa-user-plus"></i> New
+                    </button>
+                    
+                    <button class="btn-secondary" id="exportTenantsBtn" title="Export to CSV">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                    
+                    <div class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    
+                    <div class="user-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </div>
+            </header>
+    <!-- Top Add Tenant Button -->
+    <div class="top-add-tenant-btn" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+        <button class="btn-primary" id="addTenantTopBtn">
+            <i class="fas fa-user-plus"></i> Add New Tenant
+        </button>
+    </div>
+
+
+            <!-- Tenant Stats -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card tenant-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-value" id="totalTenants">0</div>
+                        <div class="stat-label">Total Tenants</div>
+                        <div class="stat-change positive" id="recentTenants">+0 this month</div>
+                    </div>
+                    
+                    <div class="stat-card tenant-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="stat-value" id="activeTenants">0</div>
+                        <div class="stat-label">Active Tenants</div>
+                        <div class="stat-change positive">+0% occupancy</div>
+                    </div>
+                    
+                    <div class="stat-card tenant-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-value" id="pendingTenants">0</div>
+                        <div class="stat-label">Pending</div>
+                        <div class="stat-change">Applications</div>
+                    </div>
+                    
+                    <div class="stat-card tenant-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="stat-value" id="totalTenantRent">R0</div>
+                        <div class="stat-label">Monthly Revenue</div>
+                        <div class="stat-change positive">+0% from last month</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tenant Filters -->
+            <section class="filters-section">
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">
+                        All Tenants
+                    </button>
+                    <button class="filter-btn" data-filter="active">
+                        Active
+                    </button>
+                    <button class="filter-btn" data-filter="inactive">
+                        Inactive
+                    </button>
+                    <button class="filter-btn" data-filter="pending">
+                        Pending
+                    </button>
+                </div>
+                
+                <div class="view-options">
+                    <button class="view-btn active" data-view="grid">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button class="view-btn" data-view="list">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Tenants Container -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h3>All Tenants</h3>
+                    <div class="section-actions">
+                        <select class="sort-select">
+                            <option>Sort by: Newest First</option>
+                            <option>Sort by: Oldest First</option>
+                            <option>Sort by: Name A-Z</option>
+                            <option>Sort by: Name Z-A</option>
+                            <option>Sort by: Rent High-Low</option>
+                            <option>Sort by: Rent Low-High</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="section-content">
+                    <div id="tenantsContainer">
+                        <!-- Tenants will be loaded here -->
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                            <p>Loading tenants...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Tenant Modal -->
+    <div id="tenantModal" class="modal">
+        <div class="modal-content glass-card" style="display: none;">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add New Tenant</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="tenantForm">
+                    <input type="hidden" id="tenantId" name="id">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="full_name">Full Name *</label>
+                            <input type="text" id="full_name" name="full_name" required 
+                                   placeholder="John Smith">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required 
+                                   placeholder="john.smith@example.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" 
+                                   placeholder="+27 11 123 4567">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="property_id">Assign to Property</label>
+                            <select id="property_id" name="property_id">
+                                <option value="">Select a property (optional)</option>
+                                <!-- Properties will be loaded dynamically -->
+                            </select>
+                            <div class="form-hint">Leaving empty creates an unassigned tenant</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="property_address">Property Address</label>
+                            <input type="text" id="property_address" name="property_address" 
+                                   placeholder="123 Main Street, City">
+                            <div class="form-hint">Required if property not selected above</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="rent_amount">Monthly Rent (R)</label>
+                            <input type="number" id="rent_amount" name="rent_amount" 
+                                   min="0" step="100" placeholder="8500">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="lease_start">Lease Start Date *</label>
+                            <input type="date" id="lease_start" name="lease_start" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lease_end">Lease End Date *</label>
+                            <input type="date" id="lease_end" name="lease_end" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="status">Tenant Status</label>
+                        <select id="status" name="status">
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary modal-close">Cancel</button>
+                        <button type="submit" class="btn-primary">Save Tenant</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="tenants.js"></script>
+    
+    <!-- Dashboard integration script -->
+    <script>
+        // Listen for messages from dashboard
+        window.addEventListener('message', function(event) {
+            if (event.data.type === 'DASHBOARD_REFRESH_REQUEST') {
+                loadTenants();
+                loadTenantStats();
+            }
+        });
+        
+        // Listen for storage events (cross-tab communication)
+        window.addEventListener('storage', function(event) {
+            if (event.key === 'rentala_tenant_update') {
+                loadTenants();
+                loadTenantStats();
+            }
+        });
+        
+        // Listen for custom tenant data changed event
+        window.addEventListener('tenantDataChanged', function() {
+            loadTenants();
+            loadTenantStats();
+        });
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update tenant count in navigation
+            const updateNavCount = () => {
+                const tenants = JSON.parse(localStorage.getItem('rentala_tenants') || '[]');
+                const countElement = document.getElementById('tenantNavCount');
+                if (countElement && tenants.length > 0) {
+                    countElement.textContent = tenants.length;
+                }
+            };
+            
+            updateNavCount();
+            
+            // Update every 30 seconds
+            setInterval(updateNavCount, 30000);
+            
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (menuToggle && sidebar) {
+                menuToggle.addEventListener('click', () => {
+                    sidebar.classList.toggle('active');
+                });
+            }
+            
+            // View toggle buttons
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.view-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    const view = this.getAttribute('data-view');
+                    toggleViewMode(view);
+                });
+            });
+            
+            // Sort select
+            const sortSelect = document.querySelector('.sort-select');
+            if (sortSelect) {
+                sortSelect.addEventListener('change', function() {
+                    sortTenants(this.value);
+                });
+            }
+        });
+        
+        function toggleViewMode(view) {
+            const container = document.getElementById('tenantsContainer');
+            if (!container) return;
+            
+            if (view === 'list') {
+                container.classList.add('list-view');
+                container.classList.remove('grid-view');
+            } else {
+                container.classList.add('grid-view');
+                container.classList.remove('list-view');
+            }
+            
+            // Store preference
+            localStorage.setItem('tenant_view_mode', view);
+        }
+        
+        function sortTenants(sortBy) {
+            // This would implement sorting logic
+            console.log('Sorting by:', sortBy);
+        }
+    </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const topBtn = document.getElementById('addTenantTopBtn');
+    const modal = document.querySelector('.modal-content.glass-card');
+    const originalBtn = document.getElementById('addTenantBtn');
+    
+    if (topBtn && modal) {
+        topBtn.addEventListener('click', function() {
+            modal.style.display = 'block';
+        });
+    }
+    
+    // Also keep original button functionality
+    if (originalBtn && modal) {
+        originalBtn.addEventListener('click', function() {
+            modal.style.display = 'block';
+        });
+    }
+    
+    // Close modal when clicking close button
+    const closeBtn = document.querySelector('.modal-close');
+    if (closeBtn && modal) {
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+    }
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+});
+</script>
+
+</body>
+</html>

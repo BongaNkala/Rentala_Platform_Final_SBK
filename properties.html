@@ -3,25 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tenant Management | Rentala</title>
+    <title>Properties Management | Rentala</title>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Unified Tenant CSS (Matches Dashboard Design) -->
-    <link rel="stylesheet" href="tenants.css">
+    <!-- Unified Properties CSS (Matches Dashboard Design) -->
+    <link rel="stylesheet" href="properties-unified.css">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <!-- Google Fonts Optimization -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Clear background overlay -->
@@ -53,15 +49,15 @@
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="properties.html" class="nav-item">
+                <a href="properties.html" class="nav-item active">
                     <i class="fas fa-building"></i>
                     <span>Properties</span>
-                    <span class="nav-badge">12</span>
+                    <span class="nav-badge" id="propertiesNavCount">0</span>
                 </a>
-                <a href="tenants.html" class="nav-item active">
+                <a href="tenants.html" class="nav-item">
                     <i class="fas fa-users"></i>
                     <span>Tenants</span>
-                    <span class="nav-badge" id="tenantNavCount">0</span>
+                    <span class="nav-badge">48</span>
                 </a>
                 <a href="payments.html" class="nav-item">
                     <i class="fas fa-file-invoice-dollar"></i>
@@ -108,8 +104,8 @@
             <!-- Top Header -->
             <header class="top-header">
                 <div class="page-title">
-                    <h1>Tenant Management</h1>
-                    <p>Manage all tenants and their rental information</p>
+                    <h1>Properties</h1>
+                    <p>Manage your properties from this dashboard</p>
                 </div>
                 
                 <div class="header-actions">
@@ -119,7 +115,7 @@
                     
                     <div class="search-box">
                         <i class="fas fa-search search-icon"></i>
-                        <input type="text" class="search-input" id="tenantSearch" placeholder="Search tenants, emails, properties...">
+                        <input type="text" class="search-input" id="propertySearch" placeholder="Search properties, addresses, units...">
                     </div>
                     
                     <button class="notification-btn">
@@ -138,15 +134,29 @@
                 <div class="stat-card">
                     <div class="stat-header">
                         <div class="stat-icon">
-                            <i class="fas fa-users"></i>
+                            <i class="fas fa-building"></i>
                         </div>
                         <div class="stat-change positive">
                             <i class="fas fa-arrow-up"></i>
-                            5.2%
+                            12.5%
                         </div>
                     </div>
-                    <div class="stat-value" id="totalTenantsCount">0</div>
-                    <div class="stat-label">Total Tenants</div>
+                    <div class="stat-value" id="totalPropertiesCount">0</div>
+                    <div class="stat-label">Total Properties</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-door-open"></i>
+                        </div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            8.2%
+                        </div>
+                    </div>
+                    <div class="stat-value" id="totalUnitsCount">0</div>
+                    <div class="stat-label">Total Units</div>
                 </div>
 
                 <div class="stat-card">
@@ -156,39 +166,25 @@
                         </div>
                         <div class="stat-change positive">
                             <i class="fas fa-arrow-up"></i>
-                            2.1%
+                            15.3%
                         </div>
                     </div>
-                    <div class="stat-value" id="activeTenantsCount">0</div>
-                    <div class="stat-label">Active Tenants</div>
+                    <div class="stat-value" id="occupiedUnitsCount">0</div>
+                    <div class="stat-label">Occupied Units</div>
                 </div>
 
                 <div class="stat-card">
                     <div class="stat-header">
                         <div class="stat-icon">
-                            <i class="fas fa-hourglass-end"></i>
+                            <i class="fas fa-percentage"></i>
                         </div>
                         <div class="stat-change negative">
                             <i class="fas fa-arrow-down"></i>
-                            1.3%
+                            3.1%
                         </div>
                     </div>
-                    <div class="stat-value" id="pendingTenantsCount">0</div>
-                    <div class="stat-label">Pending Applications</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div class="stat-icon">
-                            <i class="fas fa-dollar-sign"></i>
-                        </div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i>
-                            8.5%
-                        </div>
-                    </div>
-                    <div class="stat-value" id="totalRentCollected">R0</div>
-                    <div class="stat-label">Total Rent Collected</div>
+                    <div class="stat-value" id="vacancyRateCount">0%</div>
+                    <div class="stat-label">Vacancy Rate</div>
                 </div>
             </section>
 
@@ -196,118 +192,126 @@
             <section class="controls-section">
                 <div class="search-box" style="flex: 1; min-width: 300px;">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="text" class="search-input" id="advancedSearch" placeholder="Search by name, email, or property...">
+                    <input type="text" class="search-input" id="advancedSearch" placeholder="Search by name, address, or type...">
                 </div>
                 
                 <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">All Tenants</button>
-                    <button class="filter-btn" data-filter="active">Active</button>
-                    <button class="filter-btn" data-filter="inactive">Inactive</button>
-                    <button class="filter-btn" data-filter="pending">Pending</button>
+                    <button class="filter-btn active" data-filter="all">All Properties</button>
+                    <button class="filter-btn" data-filter="residential">Residential</button>
+                    <button class="filter-btn" data-filter="commercial">Commercial</button>
+                    <button class="filter-btn" data-filter="mixed">Mixed Use</button>
                 </div>
 
-                <button class="tenant-btn tenant-btn-primary" id="addTenantBtn">
-                    <i class="fas fa-user-plus"></i> Add Tenant
+                <button class="property-btn property-btn-primary" id="addPropertyBtn">
+                    <i class="fas fa-plus"></i> Add Property
                 </button>
             </section>
 
-            <!-- Tenants Grid -->
-            <section class="tenants-grid" id="tenantsContainer">
-                <!-- Tenants will be loaded here -->
+            <!-- Properties Grid -->
+            <section class="properties-grid" id="propertiesContainer">
+                <!-- Properties will be loaded here -->
                 <div class="loading-state">
                     <div class="spinner"></div>
-                    <p>Loading tenants...</p>
+                    <p>Loading properties...</p>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- Tenant Detail Modal -->
-    <div id="tenantDetailModal" class="modal" style="display: none;">
+    <!-- Property Detail Modal -->
+    <div id="propertyDetailModal" class="modal" style="display: none;">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modalTitle">Tenant Details</h2>
+                <h2 id="modalTitle">Property Details</h2>
                 <button class="modal-close" id="closeModalBtn">&times;</button>
             </div>
             
             <div class="modal-body" id="modalBody">
-                <!-- Tenant details will be loaded here -->
+                <!-- Property details will be loaded here -->
             </div>
             
             <div class="modal-footer">
-                <button class="tenant-btn" id="editTenantBtn">
+                <button class="property-btn" id="editPropertyBtn">
                     <i class="fas fa-edit"></i> Edit
                 </button>
-                <button class="tenant-btn tenant-btn-primary" id="saveTenantBtn">
+                <button class="property-btn property-btn-primary" id="savePropertyBtn">
                     <i class="fas fa-save"></i> Save
                 </button>
-                <button class="tenant-btn" id="deleteTenantBtn">
+                <button class="property-btn" id="deletePropertyBtn">
                     <i class="fas fa-trash"></i> Delete
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Add/Edit Tenant Modal -->
-    <div id="tenantFormModal" class="modal" style="display: none;">
+    <!-- Add/Edit Property Modal -->
+    <div id="propertyFormModal" class="modal" style="display: none;">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="formModalTitle">Add New Tenant</h2>
+                <h2 id="formModalTitle">Add New Property</h2>
                 <button class="modal-close" id="closeFormModalBtn">&times;</button>
             </div>
             
-            <form id="tenantForm" class="modal-body">
+            <form id="propertyForm" class="modal-body">
                 <div class="form-group">
-                    <label for="tenantName">Full Name *</label>
-                    <input type="text" id="tenantName" name="name" required>
+                    <label for="propertyName">Property Name *</label>
+                    <input type="text" id="propertyName" name="name" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="tenantEmail">Email *</label>
-                    <input type="email" id="tenantEmail" name="email" required>
+                    <label for="propertyAddress">Address *</label>
+                    <input type="text" id="propertyAddress" name="address" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="tenantPhone">Phone Number</label>
-                    <input type="tel" id="tenantPhone" name="phone">
+                    <label for="propertyCity">City *</label>
+                    <input type="text" id="propertyCity" name="city" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="tenantProperty">Property *</label>
-                    <select id="tenantProperty" name="property" required>
-                        <option value="">Select a property</option>
+                    <label for="propertyPostalCode">Postal Code</label>
+                    <input type="text" id="propertyPostalCode" name="postalCode">
+                </div>
+                
+                <div class="form-group">
+                    <label for="propertyType">Property Type *</label>
+                    <select id="propertyType" name="type" required>
+                        <option value="">Select type</option>
+                        <option value="residential">Residential</option>
+                        <option value="commercial">Commercial</option>
+                        <option value="mixed">Mixed Use</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="tenantRent">Monthly Rent (R) *</label>
-                    <input type="number" id="tenantRent" name="rent" min="0" step="0.01" required>
+                    <label for="propertyUnits">Number of Units *</label>
+                    <input type="number" id="propertyUnits" name="units" min="1" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="tenantLeaseStart">Lease Start Date *</label>
-                    <input type="date" id="tenantLeaseStart" name="leaseStart" required>
+                    <label for="propertyValue">Property Value (R) *</label>
+                    <input type="number" id="propertyValue" name="value" min="0" step="0.01" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="tenantLeaseEnd">Lease End Date *</label>
-                    <input type="date" id="tenantLeaseEnd" name="leaseEnd" required>
+                    <label for="propertyDescription">Description</label>
+                    <textarea id="propertyDescription" name="description" placeholder="Enter property description..."></textarea>
                 </div>
                 
                 <div class="form-group">
-                    <label for="tenantStatus">Status *</label>
-                    <select id="tenantStatus" name="status" required>
+                    <label for="propertyStatus">Status *</label>
+                    <select id="propertyStatus" name="status" required>
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>
-                        <option value="pending">Pending</option>
+                        <option value="maintenance">Under Maintenance</option>
                     </select>
                 </div>
             </form>
             
             <div class="modal-footer">
-                <button class="tenant-btn" id="cancelFormBtn">Cancel</button>
-                <button class="tenant-btn tenant-btn-primary" id="submitFormBtn">
-                    <i class="fas fa-save"></i> Save Tenant
+                <button class="property-btn" id="cancelFormBtn">Cancel</button>
+                <button class="property-btn property-btn-primary" id="submitFormBtn">
+                    <i class="fas fa-save"></i> Save Property
                 </button>
             </div>
         </div>
@@ -317,6 +321,15 @@
     <div id="notificationsContainer"></div>
 
     <!-- Scripts -->
-    <script src="tenant.js"></script>
+    <script src="properties.js"></script>
 </body>
 </html>
+
+    <!-- Scripts -->
+    <script src="properties.js"></script>
+</body>
+</html>
+
+    <!-- Google Fonts Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

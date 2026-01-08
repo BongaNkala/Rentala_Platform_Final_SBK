@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Login | Rentala</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        .subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+        }
+        
+        .login-option {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        
+        .login-option:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        
+        .option-title {
+            color: #2d3748;
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .option-desc {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+        
+        .credential {
+            background: #f7fafc;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+        
+        .demo-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Rentala Dev Login</h1>
+        <p class="subtitle">Choose a login method for development</p>
+        
+        <div class="login-option" onclick="loginAsDemo()">
+            <div class="option-title">
+                <i class="fas fa-user-secret" style="color: #667eea;"></i>
+                Demo Account
+            </div>
+            <p class="option-desc">Use pre-configured demo credentials</p>
+            <div class="credential">
+                Email: demo@rentala.com<br>
+                Password: demopassword123
+            </div>
+        </div>
+        
+        <div class="login-option" onclick="loginAsAdmin()">
+            <div class="option-title">
+                <i class="fas fa-user-tie" style="color: #10b981;"></i>
+                Admin Account
+            </div>
+            <p class="option-desc">Full access with admin privileges</p>
+            <div class="credential">
+                Email: admin@rentala.com<br>
+                Password: admin123
+            </div>
+        </div>
+        
+        <div class="login-option" onclick="loginDirect()">
+            <div class="option-title">
+                <i class="fas fa-bolt" style="color: #f59e0b;"></i>
+                Direct Access
+            </div>
+            <p class="option-desc">Skip login and go directly to properties</p>
+            <div class="credential">
+                No credentials required
+            </div>
+        </div>
+        
+        <button class="btn btn-primary" onclick="goToProperties()">
+            <i class="fas fa-arrow-right"></i> Go to Properties Page
+        </button>
+        
+        <div class="demo-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>Development Mode:</strong> This is for testing only. In production, proper authentication is required.
+        </div>
+    </div>
+    
+    <script>
+        function loginAsDemo() {
+            const user = {
+                id: 1,
+                name: 'Demo User',
+                email: 'demo@rentala.com',
+                role: 'user'
+            };
+            localStorage.setItem('authToken', 'demo-token-' + Date.now());
+            localStorage.setItem('user', JSON.stringify(user));
+            alert('Logged in as Demo User!');
+        }
+        
+        function loginAsAdmin() {
+            const user = {
+                id: 2,
+                name: 'Admin User',
+                email: 'admin@rentala.com',
+                role: 'admin'
+            };
+            localStorage.setItem('authToken', 'admin-token-' + Date.now());
+            localStorage.setItem('user', JSON.stringify(user));
+            alert('Logged in as Admin!');
+        }
+        
+        function loginDirect() {
+            // Create minimal user data
+            const user = {
+                id: 0,
+                name: 'Direct Access',
+                email: 'direct@example.com',
+                role: 'viewer'
+            };
+            localStorage.setItem('authToken', 'direct-access-token');
+            localStorage.setItem('user', JSON.stringify(user));
+            alert('Direct access granted!');
+        }
+        
+        function goToProperties() {
+            // Check if we have a token
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                alert('Please select a login method first!');
+                return;
+            }
+            
+            // Redirect to properties page
+            window.location.href = 'properties.html?direct=true';
+        }
+        
+        // Auto-select demo on page load if no token exists
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                loginAsDemo();
+            }
+        });
+    </script>
+</body>
+</html>

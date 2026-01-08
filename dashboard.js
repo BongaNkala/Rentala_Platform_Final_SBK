@@ -8,7 +8,7 @@
  * Main entry point when DOM is fully loaded
  */
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('í¿  Rentala Dashboard Initializing...');
+    console.log('ï¿½ï¿½ï¿½ Rentala Dashboard Initializing...');
     console.log('âœ¨ Features: Glassmorphism design, real-time updates, responsive layout');
     
     initializeDashboard();
@@ -28,7 +28,7 @@ function initializeDashboard() {
             const sidebar = document.getElementById('sidebar');
             if (sidebar) {
                 sidebar.classList.remove('active');
-                console.log('í³± Sidebar auto-hidden on desktop');
+                console.log('ï¿½ï¿½ï¿½ Sidebar auto-hidden on desktop');
             }
         }, 3000);
     }
@@ -49,7 +49,7 @@ function setupEventListeners() {
     if (menuToggle && sidebar) {
         menuToggle.addEventListener('click', () => {
             sidebar.classList.toggle('active');
-            console.log(`í³± Sidebar ${sidebar.classList.contains('active') ? 'opened' : 'closed'}`);
+            console.log(`ï¿½ï¿½ï¿½ Sidebar ${sidebar.classList.contains('active') ? 'opened' : 'closed'}`);
         });
         
         // Close sidebar when clicking outside on mobile
@@ -84,9 +84,8 @@ function setupEventListeners() {
     if (firstPeriodBtn && !document.querySelector('.period-btn.active')) {
         firstPeriodBtn.classList.add('.active');
     }
-            console.log(`í³Š Period changed to: ${period}`);
-        });
-    });
+            console.log(`ï¿½ï¿½ï¿½ Period changed to: ${period}`);
+        }
     
     // Navigation items
     document.querySelectorAll('.nav-item').forEach(item => {
@@ -102,7 +101,7 @@ function setupEventListeners() {
                 
                 // Update page title based on navigation
                 updatePageTitle(this);
-                console.log(`í³‹ Navigation changed to: ${this.querySelector('span').textContent}`);
+                console.log(`ï¿½ï¿½ï¿½ Navigation changed to: ${this.querySelector('span').textContent}`);
             }
         });
     });
@@ -116,7 +115,7 @@ function setupEventListeners() {
             
             // In a real app, this would navigate or open a modal
             showPropertyModal(propertyTitle, action);
-            console.log(`í¿  Property action: ${action} - ${propertyTitle}`);
+            console.log(`ï¿½ï¿½ï¿½ Property action: ${action} - ${propertyTitle}`);
         });
     });
     
@@ -161,7 +160,6 @@ function setupEventListeners() {
             }
         });
     }
-}
 
 /**
  * Set up responsive behavior
@@ -238,7 +236,7 @@ function performSearch(query) {
         
         // Show search results (in a real app, this would update the UI)
         showNotification(`Search results for: "${query}"`, 'info');
-        console.log(`í´ Search performed: "${query}"`);
+        console.log(`ï¿½ï¿½ï¿½ Search performed: "${query}"`);
         
         // In a real app, you would:
         // 1. Make an API call
@@ -270,7 +268,7 @@ function showNotifications() {
         'Rent payment received for Unit 105'
     ];
     
-    alert(`í³¢ You have ${notifications.length} notifications:\n\nâ€¢ ${notifications.join('\nâ€¢ ')}`);
+    alert(`ï¿½ï¿½ï¿½ You have ${notifications.length} notifications:\n\nâ€¢ ${notifications.join('\nâ€¢ ')}`);
 }
 
 /**
@@ -299,7 +297,7 @@ function updateDashboardStats() {
     // In a real app, this would fetch data from an API
     // For now, simulate updating stats
     setTimeout(() => {
-        console.log('í³ˆ Dashboard stats updated');
+        console.log('ï¿½ï¿½ï¿½ Dashboard stats updated');
         // Update UI elements here
     }, 1000);
 }
@@ -319,7 +317,7 @@ function updateChartData(period) {
  */
 function setupNotifications() {
     // In a real app, this would setup WebSocket or polling for notifications
-    console.log('í´” Notifications system initialized');
+    console.log('ï¿½ï¿½ï¿½ Notifications system initialized');
 }
 
 /**

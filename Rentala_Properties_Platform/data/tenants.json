@@ -1,0 +1,49 @@
+[
+  {
+    "id": "1",
+    "name": "John Smith",
+    "email": "john@example.com",
+    "phone": "0712345678",
+    "propertyId": "1",
+    "propertyName": "Sunset Villa",
+    "rent": 8500,
+    "leaseStart": "2024-01-01",
+    "leaseEnd": "2024-12-31",
+    "status": "active",
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-01-01T10:00:00.000Z",
+    "payments": [
+      {
+        "date": "2024-01-05",
+        "amount": 8500,
+        "status": "completed"
+      },
+      {
+        "date": "2024-02-05",
+        "amount": 8500,
+        "status": "completed"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Sarah Johnson",
+    "email": "sarah@example.com",
+    "phone": "0712345679",
+    "propertyId": "2",
+    "propertyName": "Mountain View Apartments",
+    "rent": 7200,
+    "leaseStart": "2024-02-01",
+    "leaseEnd": "2025-01-31",
+    "status": "active",
+    "createdAt": "2024-02-01T09:30:00.000Z",
+    "updatedAt": "2024-02-01T09:30:00.000Z",
+    "payments": [
+      {
+        "date": "2024-02-05",
+        "amount": 7200,
+        "status": "completed"
+      }
+    ]
+  }
+]

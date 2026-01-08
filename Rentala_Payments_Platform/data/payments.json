@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "tenantId": "1",
+    "tenantName": "John Smith",
+    "propertyId": "1",
+    "propertyName": "Sunset Villa",
+    "amount": 8500,
+    "date": "2024-01-15",
+    "method": "bank_transfer",
+    "status": "completed",
+    "reference": "TXN001234",
+    "notes": "Monthly rent payment",
+    "createdAt": "2024-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "2",
+    "tenantId": "2",
+    "tenantName": "Sarah Johnson",
+    "propertyId": "2",
+    "propertyName": "Mountain View",
+    "amount": 7200,
+    "date": "2024-01-10",
+    "method": "eft",
+    "status": "pending",
+    "reference": "TXN001235",
+    "notes": "Partial payment received",
+    "createdAt": "2024-01-10T09:30:00.000Z"
+  },
+  {
+    "id": "3",
+    "tenantId": "3",
+    "tenantName": "Mike Wilson",
+    "propertyId": "3",
+    "propertyName": "City Center Apt",
+    "amount": 9500,
+    "date": "2023-12-25",
+    "method": "cash",
+    "status": "overdue",
+    "reference": "TXN001236",
+    "notes": "Overdue - follow up required",
+    "createdAt": "2023-12-25T14:00:00.000Z"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "tenantId": "1",
+    "tenantName": "John Smith",
+    "propertyId": "1",
+    "propertyName": "Sunset Villa",
+    "amount": 8500,
+    "date": "2024-01-15",
+    "method": "bank_transfer",
+    "status": "completed",
+    "reference": "TXN001234",
+    "notes": "Monthly rent payment",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "2",
+    "tenantId": "2",
+    "tenantName": "Sarah Johnson",
+    "propertyId": "2",
+    "propertyName": "Mountain View Apartments",
+    "amount": 7200,
+    "date": "2024-02-05",
+    "method": "eft",
+    "status": "completed",
+    "reference": "TXN001235",
+    "notes": "First month payment",
+    "createdAt": "2024-02-05T09:30:00.000Z",
+    "updatedAt": "2024-02-05T09:30:00.000Z"
+  }
+]

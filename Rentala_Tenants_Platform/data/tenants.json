@@ -1,0 +1,111 @@
+[
+  {
+    "id": "1",
+    "name": "John Smith",
+    "email": "john@example.com",
+    "phone": "0712345678",
+    "propertyId": "1",
+    "propertyName": "Sunset Villa",
+    "rent": 8500,
+    "leaseStart": "2024-01-01",
+    "leaseEnd": "2024-12-31",
+    "status": "active",
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-01-01T10:00:00.000Z",
+    "payments": [
+      {
+        "date": "2024-01-05",
+        "amount": 8500,
+        "status": "completed"
+      },
+      {
+        "date": "2024-02-05",
+        "amount": 8500,
+        "status": "completed"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Sarah Johnson",
+    "email": "sarah@example.com",
+    "phone": "0712345679",
+    "propertyId": "2",
+    "propertyName": "Mountain View",
+    "rent": 7200,
+    "leaseStart": "2024-02-01",
+    "leaseEnd": "2025-01-31",
+    "status": "active",
+    "createdAt": "2024-02-01T09:30:00.000Z",
+    "updatedAt": "2024-02-01T09:30:00.000Z",
+    "payments": [
+      {
+        "date": "2024-02-05",
+        "amount": 7200,
+        "status": "completed"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Mike Wilson",
+    "email": "mike@example.com",
+    "phone": "0712345680",
+    "propertyId": "3",
+    "propertyName": "City Center Apt",
+    "rent": 9500,
+    "leaseStart": "2023-12-01",
+    "leaseEnd": "2024-11-30",
+    "status": "pending",
+    "createdAt": "2023-11-15T14:00:00.000Z",
+    "updatedAt": "2023-11-15T14:00:00.000Z",
+    "payments": []
+  },
+  {
+    "id": "4",
+    "name": "Emma Davis",
+    "email": "emma@example.com",
+    "phone": "0712345681",
+    "propertyId": "4",
+    "propertyName": "Garden House",
+    "rent": 6800,
+    "leaseStart": "2024-01-15",
+    "leaseEnd": "2025-01-14",
+    "status": "active",
+    "createdAt": "2024-01-10T11:00:00.000Z",
+    "updatedAt": "2024-01-10T11:00:00.000Z",
+    "payments": [
+      {
+        "date": "2024-01-20",
+        "amount": 6800,
+        "status": "completed"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "name": "David Brown",
+    "email": "david@example.com",
+    "phone": "0712345682",
+    "propertyId": "5",
+    "propertyName": "Lake View",
+    "rent": 7800,
+    "leaseStart": "2023-11-01",
+    "leaseEnd": "2024-10-31",
+    "status": "inactive",
+    "createdAt": "2023-10-20T16:00:00.000Z",
+    "updatedAt": "2023-10-20T16:00:00.000Z",
+    "payments": [
+      {
+        "date": "2023-11-05",
+        "amount": 7800,
+        "status": "completed"
+      },
+      {
+        "date": "2023-12-05",
+        "amount": 7800,
+        "status": "completed"
+      }
+    ]
+  }
+]

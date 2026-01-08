@@ -1,0 +1,67 @@
+[
+  {
+    "id": "1",
+    "tenantId": "1",
+    "tenantName": "John Smith",
+    "propertyId": "1",
+    "propertyName": "Sunset Villa",
+    "amount": 8500,
+    "date": "2024-01-15",
+    "method": "bank_transfer",
+    "status": "completed",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "2",
+    "tenantId": "2",
+    "tenantName": "Sarah Johnson",
+    "propertyId": "2",
+    "propertyName": "Mountain View Apartments",
+    "amount": 7200,
+    "date": "2024-02-05",
+    "method": "eft",
+    "status": "completed",
+    "createdAt": "2024-02-05T09:30:00.000Z",
+    "updatedAt": "2024-02-05T09:30:00.000Z"
+  },
+  {
+    "id": "3",
+    "tenantId": "3",
+    "tenantName": "Michael Brown",
+    "propertyId": "3",
+    "propertyName": "City Center Office Tower",
+    "amount": 9500,
+    "date": "2024-02-10",
+    "method": "bank_transfer",
+    "status": "completed",
+    "createdAt": "2024-02-10T14:20:00.000Z",
+    "updatedAt": "2024-02-10T14:20:00.000Z"
+  },
+  {
+    "id": "4",
+    "tenantId": "4",
+    "tenantName": "Emma Davis",
+    "propertyId": "4",
+    "propertyName": "Garden House Complex",
+    "amount": 6800,
+    "date": "2024-02-15",
+    "method": "cash",
+    "status": "pending",
+    "createdAt": "2024-02-15T11:00:00.000Z",
+    "updatedAt": "2024-02-15T11:00:00.000Z"
+  },
+  {
+    "id": "5",
+    "tenantId": "1",
+    "tenantName": "John Smith",
+    "propertyId": "1",
+    "propertyName": "Sunset Villa",
+    "amount": 8500,
+    "date": "2024-02-15",
+    "method": "bank_transfer",
+    "status": "completed",
+    "createdAt": "2024-02-15T10:30:00.000Z",
+    "updatedAt": "2024-02-15T10:30:00.000Z"
+  }
+]

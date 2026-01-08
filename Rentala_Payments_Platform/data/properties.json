@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "name": "Sunset Villa",
+    "address": "123 Beach Rd",
+    "type": "House",
+    "rent": 8500,
+    "bedrooms": 3,
+    "bathrooms": 2
+  },
+  {
+    "id": "2",
+    "name": "Mountain View",
+    "address": "456 Hill St",
+    "type": "Apartment",
+    "rent": 7200,
+    "bedrooms": 2,
+    "bathrooms": 1
+  },
+  {
+    "id": "3",
+    "name": "City Center Apt",
+    "address": "789 Main St",
+    "type": "Apartment",
+    "rent": 9500,
+    "bedrooms": 3,
+    "bathrooms": 2
+  }
+]

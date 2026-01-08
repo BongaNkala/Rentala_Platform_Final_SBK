@@ -1,0 +1,58 @@
+[
+  {
+    "id": "1",
+    "name": "John Smith",
+    "email": "john@example.com",
+    "phone": "0712345678",
+    "propertyId": "1",
+    "propertyName": "Sunset Villa",
+    "rent": 8500,
+    "leaseStart": "2024-01-01",
+    "leaseEnd": "2024-12-31",
+    "status": "active",
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "2",
+    "name": "Sarah Johnson",
+    "email": "sarah@example.com",
+    "phone": "0712345679",
+    "propertyId": "2",
+    "propertyName": "Mountain View Apartments",
+    "rent": 7200,
+    "leaseStart": "2024-02-01",
+    "leaseEnd": "2025-01-31",
+    "status": "active",
+    "createdAt": "2024-02-01T09:30:00.000Z",
+    "updatedAt": "2024-02-01T09:30:00.000Z"
+  },
+  {
+    "id": "3",
+    "name": "Michael Brown",
+    "email": "michael@example.com",
+    "phone": "0712345680",
+    "propertyId": "3",
+    "propertyName": "City Center Office Tower",
+    "rent": 9500,
+    "leaseStart": "2023-11-01",
+    "leaseEnd": "2024-10-31",
+    "status": "active",
+    "createdAt": "2023-11-01T14:00:00.000Z",
+    "updatedAt": "2023-11-01T14:00:00.000Z"
+  },
+  {
+    "id": "4",
+    "name": "Emma Davis",
+    "email": "emma@example.com",
+    "phone": "0712345681",
+    "propertyId": "4",
+    "propertyName": "Garden House Complex",
+    "rent": 6800,
+    "leaseStart": "2024-01-15",
+    "leaseEnd": "2024-12-14",
+    "status": "active",
+    "createdAt": "2024-01-15T11:30:00.000Z",
+    "updatedAt": "2024-01-15T11:30:00.000Z"
+  }
+]

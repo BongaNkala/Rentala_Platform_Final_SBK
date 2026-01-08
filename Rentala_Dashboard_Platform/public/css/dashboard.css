@@ -1862,8 +1862,6 @@ html {
         backdrop-filter: none !important;
     }
 }
-# Append the quick-stats styling to tenants.css
-cat >> css/tenants.css << 'EOF'
 
 /* Quick Stats Section - Additional Styles */
 
@@ -2228,6 +2226,3 @@ cat >> css/tenants.css << 'EOF'
             inset 0 1px 1px rgba(255, 255, 255, 0.1);
     }
 }
-EOF
-
-echo "Quick-stats CSS appended to tenants.css"
